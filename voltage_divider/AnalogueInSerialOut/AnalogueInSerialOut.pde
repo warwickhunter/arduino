@@ -30,19 +30,34 @@
 const int analogInPin = 0;  // Analog input pin that the potentiometer is attached to
 const int analogOutPin = 13; // Analog output pin that the LED is attached to
 
-int sensorValue = 0;        // value read from the pot
-int outputValue = 0;        // value output to the PWM (analog out)
+// The scaling factor that converts the sensor reading to a voltage. This has been calibrated 
+// with a volt meter and compensates for some inaccuracy in the voltage divider.
+const double VOLTS_SCALE = 1051.47 / 25.0;
+
+int    sensorValue = 0;        // value read from the analogue input pin
+int    outputValue = 0;        // value output to the PWM (analog out)
+double voltage     = 0.0;      // voltage calculated
 
 void setup() {
   // initialize serial communications at 9600 bps:
   Serial.begin(9600); 
 }
 
+// Scale the value of the sensor (0-1023) to be volts (0-25v)
+double toVolts(int sensorValue) {
+  return sensorValue / VOLTS_SCALE;
+}
+
 void loop() {
   // read the analog in value:
   sensorValue = analogRead(analogInPin);            
+
   // map it to the range of the analog out:
   outputValue = map(sensorValue, 0, 1023, 0, 255);  
+
+  // map it to a voltage
+  voltage = toVolts(sensorValue);
+
   // change the analog out value:
   analogWrite(analogOutPin, outputValue);           
 
@@ -50,10 +65,12 @@ void loop() {
   Serial.print("sensor = " );                       
   Serial.print(sensorValue);      
   Serial.print("\t output = ");      
-  Serial.println(outputValue);   
+  Serial.print(outputValue);   
+  Serial.print("\t voltage = ");      
+  Serial.println(voltage);   
 
   // wait at least 10 milliseconds before the next loop
   // for the analog-to-digital converter to settle
   // after the last reading:
-  delay(50);                     
+  delay(150);                     
 }

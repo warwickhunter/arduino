@@ -7,18 +7,18 @@
  *      Author: Warwick Hunter
  */
 
-#ifndef TEMPERATURE_SENSOR_H_
-#define TEMPERATURE_SENSOR_H_
+#ifndef TEMPERATURE_H_
+#define TEMPERATURE_H_
 
 #include "dht.h"
 
-class TemperatureSensor {
+class Temperature {
 
 public:
-    explicit TemperatureSensor(int digitalPinNumber);
-    virtual ~TemperatureSensor();
+    explicit Temperature(int digitalPinNumber);
+    virtual ~Temperature();
 
-    virtual void setup();
+    void setup();
 
     /**
      * Read the temperature and humidity from the sensor. Returns true if the data was read, false otherwise
@@ -34,4 +34,4 @@ private:
 };
 
 
-#endif /* TEMPERATURE_SENSOR_H_ */
+#endif /* TEMPERATURE_H_ */

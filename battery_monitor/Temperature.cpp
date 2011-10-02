@@ -7,23 +7,23 @@
  *      Author: Warwick Hunter
  */
 
-#include "TemperatureSensor.h"
+#include "Temperature.h"
 #include <WProgram.h>
 
-TemperatureSensor::TemperatureSensor(int digitalPinNumber)
+Temperature::Temperature(int digitalPinNumber)
     : m_pin(digitalPinNumber), m_dht() {
 }
 
-TemperatureSensor::~TemperatureSensor() {
+Temperature::~Temperature() {
 }
 
-void TemperatureSensor::setup() {
+void Temperature::setup() {
 }
 
 /**
  * Read the temperature and humidity. Returns true if the data was read, false otherwise
  */
-bool TemperatureSensor::read() {
+bool Temperature::read() {
 
     int chk = m_dht.read11(m_pin);
     switch (chk) {
@@ -35,11 +35,11 @@ bool TemperatureSensor::read() {
     return true;
 }
 
-double TemperatureSensor::getHumidity() {
+double Temperature::getHumidity() {
     return m_dht.humidity;
 }
 
-double TemperatureSensor::getTemperature() {
+double Temperature::getTemperature() {
     return m_dht.temperature;
 }
 

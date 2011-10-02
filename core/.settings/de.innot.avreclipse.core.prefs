@@ -1,9 +1,0 @@
-#Fri Sep 30 07:55:13 EST 2011
-avrtarget/ClockFrequency=16000000
-avrtarget/ExtRAMSize=0
-avrtarget/ExtendedRAM=false
-avrtarget/MCUType=atmega2560
-avrtarget/UseEEPROM=false
-avrtarget/UseExtendedRAMforHeap=true
-avrtarget/perConfig=false
-eclipse.preferences.version=1

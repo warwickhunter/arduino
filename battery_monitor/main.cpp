@@ -28,7 +28,7 @@ void setup() {
     Serial.begin(115200);
     voltage.setup();
     temperature.setup();
-    Serial.println("Battery Monitor v1.0, build "  __DATE__ " " __TIME__);
+    Serial.println("Battery Monitor v1.0, build " __DATE__ " " __TIME__);
 }
 
 void loop() {

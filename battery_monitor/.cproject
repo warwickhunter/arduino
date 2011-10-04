@@ -38,6 +38,7 @@
 								</option>
 								<option id="de.innot.avreclipse.compiler.option.optimize.other.1938782557" name="Other Optimization Flags" superClass="de.innot.avreclipse.compiler.option.optimize.other" value="-ffunction-sections -fdata-sections" valueType="string"/>
 								<option id="de.innot.avreclipse.compiler.option.otherflags.484369868" name="Other flags" superClass="de.innot.avreclipse.compiler.option.otherflags" value="-DARDUINO=100" valueType="string"/>
+								<option id="de.innot.avreclipse.compiler.option.std.883631102" name="Language Standard" superClass="de.innot.avreclipse.compiler.option.std" value="de.innot.avreclipse.compiler.option.std.gnu99" valueType="enumerated"/>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.393654961" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.cppcompiler.app.release.288971499" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.release">

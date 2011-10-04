@@ -7,8 +7,14 @@
  *      Author: Warwick Hunter
  */
 
-#include "Temperature.h"
+#if ARDUINO == 22
 #include <WProgram.h>
+#endif
+#if ARDUINO == 100
+#include <Arduino.h>
+#endif
+
+#include "Temperature.h"
 
 Temperature::Temperature(int digitalPinNumber)
     : m_pin(digitalPinNumber), m_dht() {
@@ -28,9 +34,9 @@ bool Temperature::read() {
     int chk = m_dht.read11(m_pin);
     switch (chk) {
         case  0: /* success */ break;
-        case -1: Serial.println("Checksum error\t"); return false;
-        case -2: Serial.println("Time out error\t"); return false;
-        default: Serial.println("Unknown error\t"); return false;
+        case -1: Serial.println("Checksum error"); return false;
+        case -2: Serial.println("Time out error"); return false;
+        default: Serial.println("Unknown error"); return false;
     }
     return true;
 }

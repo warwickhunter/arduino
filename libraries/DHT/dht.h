@@ -11,7 +11,11 @@
 #ifndef dht_h
 #define dht_h
 
+#if ARDUINO == 22
 #include "WProgram.h"
+#else
+#include <Arduino.h>
+#endif
 
 #define DHT_LIB_VERSION "0.1.00"
 

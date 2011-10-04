@@ -19,7 +19,14 @@
  */
 
 #include "Voltage.h"
-#include <wiring.h>
+
+#if ARDUINO == 22
+#include <WProgram.h>
+#endif
+#if ARDUINO == 100
+#include <Arduino.h>
+#endif
+
 
 // The scaling factor that converts the sensor reading to a voltage. This has been calibrated
 // with a volt meter and compensates for some inaccuracy in the voltage divider.

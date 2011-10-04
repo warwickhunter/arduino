@@ -12,6 +12,14 @@
 
 #include "dht.h"
 
+#if ARDUINO == 22
+#include <WProgram.h>
+#endif
+#if ARDUINO == 100
+#include <Arduino.h>
+#endif
+
+
 #define TIMEOUT 10000
 
 /////////////////////////////////////////////////////

@@ -11,7 +11,7 @@
 #ifndef dht_h
 #define dht_h
 
-#include <WProgram.h>
+#include <stdint.h>
 
 #define DHT_LIB_VERSION "0.1.00"
 

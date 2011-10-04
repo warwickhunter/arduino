@@ -8,7 +8,13 @@
  *  Created on: 2011-10-01
  *      Author: Warwick Hunter
  */
+#if ARDUINO == 22
 #include <WProgram.h>
+#endif
+#if ARDUINO == 100
+#include <Arduino.h>
+#endif
+
 #include "Voltage.h"
 #include "Temperature.h"
 
@@ -40,6 +46,7 @@ void loop() {
     delay(1000);
 }
 
+#if ARDUINO == 22
 int main(void) {
     init();
     setup();
@@ -48,3 +55,4 @@ int main(void) {
     }
     return 0;
 }
+#endif

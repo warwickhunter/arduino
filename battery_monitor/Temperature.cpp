@@ -7,13 +7,7 @@
  *      Author: Warwick Hunter
  */
 
-#if ARDUINO == 22
-#include <WProgram.h>
-#endif
-#if ARDUINO == 100
 #include <Arduino.h>
-#endif
-
 #include "Temperature.h"
 
 Temperature::Temperature(int digitalPinNumber)

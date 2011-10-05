@@ -11,13 +11,7 @@
  *  Created on: 2011-10-01
  *      Author: Warwick Hunter
  */
-#if ARDUINO == 22
-#include <WProgram.h>
-#endif
-#if ARDUINO == 100
 #include <Arduino.h>
-#endif
-
 #include "Voltage.h"
 #include "Temperature.h"
 #include "PowerSave.h"
@@ -62,14 +56,3 @@ void loop() {
 
     powerSave.sleep();
 }
-
-#if ARDUINO == 22
-int main(void) {
-    init();
-    setup();
-    for (;;) {
-        loop();
-    }
-    return 0;
-}
-#endif

@@ -2,6 +2,8 @@
  * Copyright Warwick Hunter 2011. All rights reserved.
  *
  * This is an experiment with the Arduino sleep mode and the watchdog timer.
+ * When the board is sleeping it consumes 19mA, when it is awake it consumes
+ * 80mA.
  *
  *  Created on: 2011-10-05
  *      Author: Warwick Hunter
@@ -9,6 +11,13 @@
 #include <Arduino.h>
 #include <avr/wdt.h>
 #include <avr/sleep.h>
+
+// Pin 13 has an LED connected on most Arduino boards:
+const int LED_PIN = 13;
+
+int counter = 0;
+volatile int wdtFired = 0;
+
 
 /**
  * Set the watchdog to interrupt every few seconds and not reset the system
@@ -35,11 +44,11 @@ void watchdogSetup(int delay) {
 void setup() {
     Serial.begin(115200);
     Serial.println("Sleepy, build " __DATE__ " " __TIME__);
+
+    pinMode(LED_PIN, OUTPUT);
+
     watchdogSetup(WDTO_8S);
 }
-
-int counter = 0;
-int wdtFired = 0;
 
 void loop() {
     Serial.print("sleepy ");
@@ -48,12 +57,22 @@ void loop() {
     Serial.println(wdtFired);
     Serial.flush();
     wdtFired = 0;
-    delay(1000);
+    digitalWrite(LED_PIN, HIGH);  // set the LED on
+    delay(250);
+    digitalWrite(LED_PIN, LOW);  // set the LED on
 
-//    set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
-//    sleep_enable();
-//    sleep_mode();                        // System sleeps here
-//    sleep_disable();                     // System continues execution here when watchdog timed out
+    Serial.print("sleeping... ");
+    Serial.flush();
+    delay(20);
+
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
+    sleep_enable();
+    sleep_mode();                        // System sleeps here
+    sleep_disable();                     // System continues execution here when watchdog timed out
+
+    Serial.println("awake");
+    Serial.flush();
+    delay(8000);
 }
 
 //****************************************************************

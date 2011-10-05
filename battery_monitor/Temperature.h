@@ -5,12 +5,17 @@
  *
  *  Created on: 2011-10-01
  *      Author: Warwick Hunter
+ *
+ * Some code originally from:
+ * FILE: dht.h
+ * VERSION: 0.1.00
+ * PURPOSE: DHT Temperature & Humidity Sensor library for Arduino
+ * URL: http://arduino.cc/playground/Main/DHTLib
  */
 
 #ifndef TEMPERATURE_H_
 #define TEMPERATURE_H_
 
-#include "dht.h"
 #include <stdint.h>
 
 class Temperature {
@@ -28,23 +33,29 @@ public:
     double getTemperature();
 
 private:
+    int read11(uint8_t pin);
+    int read22(uint8_t pin);
+    int read(uint8_t pin);
+
     uint8_t m_pin;
-    dht     m_dht;
+    uint8_t m_bits[5];  // buffer to receive data
+    double  m_humidity;
+    double  m_temperature;
 };
 
 inline Temperature::Temperature(uint8_t digitalPinNumber)
-  : m_pin(digitalPinNumber), m_dht() {
+  : m_pin(digitalPinNumber) {
 }
 
 inline void Temperature::setup() {
 }
 
 inline double Temperature::getHumidity() {
-    return m_dht.getHumidity();
+    return m_humidity;
 }
 
 inline double Temperature::getTemperature() {
-    return m_dht.getTemperature();
+    return m_temperature;
 }
 
 #endif /* TEMPERATURE_H_ */

@@ -17,10 +17,10 @@ bool Temperature::read() {
 
     int chk = m_dht.read11(m_pin);
     switch (chk) {
-        case  0: /* success */ break;
-        case -1: Serial.println("Checksum error"); return false;
-        case -2: Serial.println("Time out error"); return false;
-        default: Serial.println("Unknown error"); return false;
+        case  0: /* success */        break;
+        case -1: /* Checksum error */ return false;
+        case -2: /* Time out error */ return false;
+        default: /* Unknown error  */ return false;
     }
     return true;
 }

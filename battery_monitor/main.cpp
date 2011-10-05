@@ -15,15 +15,15 @@
 #include "Voltage.h"
 #include "Temperature.h"
 #include "PowerSave.h"
-
+#include <WString.h>
 
 static const int LED_PIN     = 13; // Pin 13 has an LED connected on most Arduino boards:
 static const int DHT11_PIN   = 4;  // Digital PIN 4 to which the DHT11 temp sensor is attached
 static const int VOLTAGE_PIN = 0;  // Analog input pin to which the voltage divider is attached
 
-static Voltage     voltage(VOLTAGE_PIN);
-static Temperature temperature(DHT11_PIN);
-static PowerSave   powerSave;
+Voltage     voltage(VOLTAGE_PIN);
+Temperature temperature(DHT11_PIN);
+PowerSave   powerSave;
 
 void setup() {
     Serial.begin(115200);
@@ -31,20 +31,20 @@ void setup() {
     voltage.setup();
     temperature.setup();
     powerSave.setup();
-    Serial.println("Battery Monitor v1.0, build " __DATE__ " " __TIME__);
+    Serial.println(F("\n\nBattery Monitor v1.0, build " __DATE__ " " __TIME__));
 }
 
 void loop() {
     digitalWrite(LED_PIN, HIGH);  // set the LED on
 
     if (temperature.read()) {
-        Serial.print("Humidity = ");
+        Serial.print(F("Humidity = "));
         Serial.print(temperature.getHumidity(), 1);
-        Serial.print(" Temperature = ");
+        Serial.print(F(" Temperature = "));
         Serial.print(temperature.getTemperature(), 1);
     }
     if (voltage.read()) {
-        Serial.print(" Voltage = ");
+        Serial.print(F(" Voltage = "));
         Serial.print(voltage.getVoltage());
     }
     Serial.println();

@@ -28,11 +28,11 @@ double Voltage::toVolts(int sensorValue) {
 }
 
 bool Voltage::read() {
-  // read the analog in value:
-  m_sensorValue = analogRead(m_pin);
+  // read the analogue input value
+  int sensorValue = analogRead(m_pin);
 
-  // map it to a voltage
-  m_voltage = toVolts(m_sensorValue);
+  // scale the input value to a voltage
+  m_voltage = toVolts(sensorValue);
 
   return true;
 }

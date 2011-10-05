@@ -27,7 +27,6 @@ private:
 
     uint8_t m_pin;
     double  m_voltage;
-    int     m_sensorValue;
 };
 
 inline Voltage::Voltage(uint8_t analoguePinNumber)

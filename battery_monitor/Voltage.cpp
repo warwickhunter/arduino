@@ -25,16 +25,6 @@
 // with a volt meter and compensates for some inaccuracy in the voltage divider.
 const double VOLTS_SCALE = 1051.47 / 25.0;
 
-Voltage::Voltage(int analoguePinNumber)
-    : m_pin(analoguePinNumber) {
-}
-
-Voltage::~Voltage() {
-}
-
-void Voltage::setup() {
-}
-
 // Scale the value of the sensor (0-1023) to be volts (0-25v)
 double Voltage::toVolts(int sensorValue) {
   return sensorValue / VOLTS_SCALE;
@@ -49,8 +39,3 @@ bool Voltage::read() {
 
   return true;
 }
-
-double Voltage::getVoltage() {
-    return m_voltage;
-}
-

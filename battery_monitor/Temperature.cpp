@@ -10,16 +10,6 @@
 #include <Arduino.h>
 #include "Temperature.h"
 
-Temperature::Temperature(int digitalPinNumber)
-    : m_pin(digitalPinNumber), m_dht() {
-}
-
-Temperature::~Temperature() {
-}
-
-void Temperature::setup() {
-}
-
 /**
  * Read the temperature and humidity. Returns true if the data was read, false otherwise
  */
@@ -34,14 +24,3 @@ bool Temperature::read() {
     }
     return true;
 }
-
-double Temperature::getHumidity() {
-    return m_dht.humidity;
-}
-
-double Temperature::getTemperature() {
-    return m_dht.temperature;
-}
-
-
-

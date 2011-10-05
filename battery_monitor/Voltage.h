@@ -14,7 +14,6 @@ class Voltage {
 
 public:
     explicit Voltage(int analoguePinNumber);
-    virtual ~Voltage();
 
     void setup();
     bool read();
@@ -29,5 +28,16 @@ private:
     double m_voltage;
     int    m_sensorValue;
 };
+
+inline Voltage::Voltage(int analoguePinNumber)
+    : m_pin(analoguePinNumber) {
+}
+
+inline void Voltage::setup() {
+}
+
+inline double Voltage::getVoltage() {
+    return m_voltage;
+}
 
 #endif /* VOLTAGE_H_ */

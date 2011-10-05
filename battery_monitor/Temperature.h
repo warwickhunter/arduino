@@ -16,7 +16,6 @@ class Temperature {
 
 public:
     explicit Temperature(int digitalPinNumber);
-    virtual ~Temperature();
 
     void setup();
 
@@ -33,5 +32,19 @@ private:
     dht m_dht;
 };
 
+inline Temperature::Temperature(int digitalPinNumber)
+  : m_pin(digitalPinNumber), m_dht() {
+}
+
+inline void Temperature::setup() {
+}
+
+inline double Temperature::getHumidity() {
+    return m_dht.humidity;
+}
+
+inline double Temperature::getTemperature() {
+    return m_dht.temperature;
+}
 
 #endif /* TEMPERATURE_H_ */

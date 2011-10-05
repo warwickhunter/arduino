@@ -15,7 +15,6 @@
 class PowerSave {
 public:
     explicit PowerSave();
-    virtual ~PowerSave();
 
     /** Perform any once only setup */
     void setup();
@@ -23,6 +22,11 @@ public:
     /** Put the system to sleep for a number of seconds */
     void sleep();
 
+private:
+    void watchdogSetup(int delay);
 };
+
+inline PowerSave::PowerSave() {
+}
 
 #endif /* POWERSAVE_H_ */

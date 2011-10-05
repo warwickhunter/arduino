@@ -13,8 +13,6 @@
 
 #include <stdint.h>
 
-#define DHT_LIB_VERSION "0.1.00"
-
 class dht
 {
   public:

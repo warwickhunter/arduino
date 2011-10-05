@@ -14,14 +14,6 @@
 #include <avr/wdt.h>
 #include <avr/sleep.h>
 
-void watchdogSetup(int delay);
-
-PowerSave::PowerSave() {
-}
-
-PowerSave::~PowerSave() {
-}
-
 /** Perform any once only setup */
 void PowerSave::setup() {
     // Set the watchdog to interrupt every 8 seconds, which is the longest period
@@ -41,7 +33,7 @@ void PowerSave::sleep() {
  * 0=16ms, 1=32ms,2=64ms,3=128ms,4=250ms,5=500ms, 6=1 sec,7=2 sec, 8=4 sec, 9=8sec
  * See the constants defined in avr/wdt.h.
  */
-void watchdogSetup(int delay) {
+void PowerSave::watchdogSetup(int delay) {
 
   byte bb;
   if (delay > 9 ) delay=9;

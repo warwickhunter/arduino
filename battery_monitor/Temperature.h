@@ -11,11 +11,11 @@
 #define TEMPERATURE_H_
 
 #include "dht.h"
+#include <stdint.h>
 
 class Temperature {
-
 public:
-    explicit Temperature(int digitalPinNumber);
+    explicit Temperature(uint8_t digitalPinNumber);
 
     void setup();
 
@@ -28,11 +28,11 @@ public:
     double getTemperature();
 
 private:
-    int m_pin;
-    dht m_dht;
+    uint8_t m_pin;
+    dht     m_dht;
 };
 
-inline Temperature::Temperature(int digitalPinNumber)
+inline Temperature::Temperature(uint8_t digitalPinNumber)
   : m_pin(digitalPinNumber), m_dht() {
 }
 
@@ -40,11 +40,11 @@ inline void Temperature::setup() {
 }
 
 inline double Temperature::getHumidity() {
-    return m_dht.humidity;
+    return m_dht.getHumidity();
 }
 
 inline double Temperature::getTemperature() {
-    return m_dht.temperature;
+    return m_dht.getTemperature();
 }
 
 #endif /* TEMPERATURE_H_ */

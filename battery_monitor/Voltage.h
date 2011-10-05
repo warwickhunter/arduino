@@ -10,10 +10,11 @@
 #ifndef VOLTAGE_H_
 #define VOLTAGE_H_
 
-class Voltage {
+#include <stdint.h>
 
+class Voltage {
 public:
-    explicit Voltage(int analoguePinNumber);
+    explicit Voltage(uint8_t analoguePinNumber);
 
     void setup();
     bool read();
@@ -24,12 +25,12 @@ private:
     // Scale the value of the sensor (0-1023) to be volts (0-25v)
     double toVolts(int sensorValue);
 
-    int    m_pin;
-    double m_voltage;
-    int    m_sensorValue;
+    uint8_t m_pin;
+    double  m_voltage;
+    int     m_sensorValue;
 };
 
-inline Voltage::Voltage(int analoguePinNumber)
+inline Voltage::Voltage(uint8_t analoguePinNumber)
     : m_pin(analoguePinNumber) {
 }
 

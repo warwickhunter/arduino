@@ -18,14 +18,23 @@ class dht
   public:
     int read11(uint8_t pin);
     int read22(uint8_t pin);
-    double humidity;
-    double temperature;
+
+    double getHumidity();
+    double getTemperature();
 
   private:
     uint8_t bits[5];  // buffer to receive data
+    double humidity;
+    double temperature;
     int read(uint8_t pin);
 };
+
+inline double dht::getHumidity() {
+    return humidity;
+}
+
+inline double dht::getTemperature() {
+    return temperature;
+}
+
 #endif
-//
-// END OF FILE
-//

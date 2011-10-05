@@ -31,7 +31,7 @@ void setup(){
 
   Serial.begin(38400);
   pinMode(pinLed,OUTPUT);
-  Serial.println("nightingale");
+  Serial.println("sleepy");
 
   // CPU Sleep Modes 
   // SM2 SM1 SM0 Sleep Mode
@@ -48,7 +48,7 @@ void setup(){
   sbi( SMCR,SM1 );     // power down mode
   cbi( SMCR,SM2 );     // power down mode
 
-  setup_watchdog(9);
+  setup_watchdog(7);
 }
 
 byte del;
@@ -60,6 +60,11 @@ byte state=0;
 //****************************************************************
 //****************************************************************
 void loop(){
+
+  Serial.print("f_wdt=");
+  Serial.println(f_wdt);
+  Serial.flush();           // wait until the last serial character is sent
+  delay(2);
 
 
   if (f_wdt==1) {  // wait for timed out watchdog / flag is set when a watchdog timeout occurs

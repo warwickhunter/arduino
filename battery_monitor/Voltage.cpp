@@ -9,10 +9,7 @@
  *
  *  Calibration of the voltage divider. The divisor appears to be 5.1005.
  *
- *                    0.00v == sensor 0    ouptut == 0
- *  9.13v / 5.1005 == 1.79v == sensor 384  output == 95
- *                    3.28v == sensor 705  output == 175
- *                    4.78v == sensor 1023 output == 255
+ *  8.84v / x == 1.73v == sensor 375
  *
  *  Created on: 2011-10-01
  *      Author: Warwick Hunter
@@ -23,7 +20,7 @@
 
 // The scaling factor that converts the sensor reading to a voltage. This has been calibrated
 // with a volt meter and compensates for some inaccuracy in the voltage divider.
-const double VOLTS_SCALE = 1051.47 / 25.0;
+const double VOLTS_SCALE = 1060.52 / 25.0;
 
 // Scale the value of the sensor (0-1023) to be volts (0-25v)
 double Voltage::toVolts(int sensorValue) {

@@ -26,12 +26,13 @@ volatile int wdtFired = 0;
 void watchdogSetup(int delay) {
 
   byte bb;
-  int ww;
   if (delay > 9 ) delay=9;
   bb=delay & 7;
   if (delay > 7) bb|= (1<<5);
   bb|= (1<<WDCE);
-  ww=bb;
+
+  Serial.print("watchdog bb=0x");
+  Serial.println((int)bb, HEX);
 
   MCUSR &= ~(1<<WDRF);
   // start timed sequence
@@ -55,14 +56,12 @@ void loop() {
     Serial.print(++counter);
     Serial.print(" wdtFired=");
     Serial.println(wdtFired);
-    Serial.flush();
     wdtFired = 0;
     digitalWrite(LED_PIN, HIGH);  // set the LED on
     delay(250);
     digitalWrite(LED_PIN, LOW);  // set the LED on
 
     Serial.print("sleeping... ");
-    Serial.flush();
     delay(20);
 
     set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
@@ -71,7 +70,6 @@ void loop() {
     sleep_disable();                     // System continues execution here when watchdog timed out
 
     Serial.println("awake");
-    Serial.flush();
     delay(8000);
 }
 

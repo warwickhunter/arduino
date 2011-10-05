@@ -27,6 +27,7 @@ const int VOLTAGE_PIN  = 0;  // Analog input pin to which the voltage divider is
 Voltage     voltage(VOLTAGE_PIN);
 Temperature temperature(DHT11_PIN);
 PowerSave   powerSave;
+long        sequenceNumber = 0;
 
 void setup() {
     Serial.begin(SERIAL_SPEED);
@@ -40,14 +41,17 @@ void setup() {
 void loop() {
     digitalWrite(LED_PIN, HIGH);  // set the LED on
 
+    Serial.print(F("Seq="));
+    Serial.print(sequenceNumber++);
+
     if (temperature.read()) {
-        Serial.print(F("Humidity = "));
+        Serial.print(F(" Humidity="));
         Serial.print(temperature.getHumidity(), 1);
-        Serial.print(F(" Temperature = "));
+        Serial.print(F(" Temperature="));
         Serial.print(temperature.getTemperature(), 1);
     }
     if (voltage.read()) {
-        Serial.print(F(" Voltage = "));
+        Serial.print(F(" Voltage="));
         Serial.print(voltage.getVoltage());
     }
     Serial.println();

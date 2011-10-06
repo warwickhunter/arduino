@@ -18,7 +18,7 @@
 #include <WString.h>
 
 const int           PAUSE        = 20;
-const unsigned long SERIAL_SPEED = 115200;
+const unsigned long SERIAL_SPEED = 9600;
 
 const int LED_PIN      = 13; // Pin 13 has an LED connected on most Arduino boards:
 const int DHT11_PIN    = 4;  // Digital PIN 4 to which the DHT11 temp sensor is attached

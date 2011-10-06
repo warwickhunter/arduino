@@ -11,3 +11,4 @@ tty.eachLine { line ->
     time.setTimeInMillis(System.currentTimeMillis())
     printf '%1$tF %1$tT %2$s %n', time, line
 }
+

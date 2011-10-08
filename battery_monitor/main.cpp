@@ -14,7 +14,6 @@
 #include <Arduino.h>
 #include "Voltage.h"
 #include "Temperature.h"
-#include "PowerSave.h"
 #include <WString.h>
 
 // Set this to 1 if you want the Arduino to go into low power mode between each sample
@@ -32,18 +31,11 @@ long        sequenceNumber = 0;
 Voltage     voltage(VOLTAGE_PIN);
 Temperature temperature(DHT11_PIN);
 
-#if WITH_SLEEP
-PowerSave   powerSave;
-#endif
-
 void setup() {
     Serial.begin(SERIAL_SPEED);
     pinMode(LED_PIN, OUTPUT);
     voltage.setup();
     temperature.setup();
-#if WITH_SLEEP
-    powerSave.setup();
-#endif
     Serial.println(F("\n\nBattery Monitor v1.0, build " __DATE__ " " __TIME__));
 }
 
@@ -68,11 +60,5 @@ void loop() {
 
     digitalWrite(LED_PIN, LOW);  // set the LED off
 
-#if WITH_SLEEP
-    // Give the serial output a chance to complete before sleeping
-    delay(SHORT_PAUSE);
-    powerSave.sleep();
-#else
     delay(SLEEP_INTERVAL);
-#endif
 }

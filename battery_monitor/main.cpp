@@ -36,23 +36,23 @@ void setup() {
     pinMode(LED_PIN, OUTPUT);
     voltage.setup();
     temperature.setup();
-    Serial.println(F("\n\nBattery Monitor v1.0, build " __DATE__ " " __TIME__));
+    Serial.println("\n\nBattery Monitor v1.0, build " __DATE__ " " __TIME__);
 }
 
 void loop() {
     digitalWrite(LED_PIN, HIGH);  // set the LED on
 
-    Serial.print(F("Seq="));
+    Serial.print("Seq=");
     Serial.print(sequenceNumber++);
 
     if (temperature.read()) {
-        Serial.print(F(" Humidity="));
+        Serial.print(" Humidity=");
         Serial.print(temperature.getHumidity(), 1);
-        Serial.print(F(" Temperature="));
+        Serial.print(" Temperature=");
         Serial.print(temperature.getTemperature(), 1);
     }
     if (voltage.read()) {
-        Serial.print(F(" Voltage="));
+        Serial.print(" Voltage=");
         Serial.print(voltage.getVoltage());
     }
     Serial.println();

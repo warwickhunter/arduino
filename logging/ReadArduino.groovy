@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 /**
- * ReadArduino - reads a line of text sent to /dev/ttyUSB1 by the battery monitoring
- * Arduino over ZigBee and prints the line along with a time stamp.
+ * ReadArduino - reads a line of text sent to a terminal such as /dev/ttyUSB1 
+ * by the battery monitoring Arduino over ZigBee and prints the line along with 
+ * a time stamp.
  * 
  * @author Warwick Hunter
  * @since  2011-10-06

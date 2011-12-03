@@ -20,12 +20,14 @@ public:
     bool read();
 
     double getVoltage();
+    int    getSensorValue();
 
 private:
     // Scale the value of the sensor (0-1023) to be volts (0-25v)
     double toVolts(int sensorValue);
 
     uint8_t m_pin;
+    int     m_sensorValue;
     double  m_voltage;
 };
 
@@ -38,6 +40,10 @@ inline void Voltage::setup() {
 
 inline double Voltage::getVoltage() {
     return m_voltage;
+}
+
+inline int Voltage::getSensorValue() {
+    return m_sensorValue;
 }
 
 #endif /* VOLTAGE_H_ */

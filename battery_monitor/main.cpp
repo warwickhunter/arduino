@@ -19,13 +19,12 @@
 // Set this to 1 if you want the Arduino to go into low power mode between each sample
 #define WITH_SLEEP 0
 
-const int           SHORT_PAUSE    = 20;
-const unsigned long SERIAL_SPEED   = 9600;
-const long          SLEEP_INTERVAL = 5000;
+const unsigned long SERIAL_SPEED   = 9600; // 9600 baud default serial port speed
+const long          SLEEP_INTERVAL = 5000; // 5 second pause in between samples
 
 const int LED_PIN      = 13; // Pin 13 has an LED connected on most Arduino boards:
-const int DHT11_PIN    = 7;  // Digital PIN 7 to which the DHT11 temp sensor is attached
-const int VOLTAGE_PIN  = 0;  // Analog input pin to which the voltage divider is attached
+const int DHT11_PIN    = 7;  // Digital PIN 7 to which the DHT11 temperature sensor is attached
+const int VOLTAGE_PIN  = 0;  // Analogue input pin to which the voltage divider is attached
 
 long        sequenceNumber = 0;
 Voltage     voltage(VOLTAGE_PIN);
@@ -54,6 +53,8 @@ void loop() {
     if (voltage.read()) {
         Serial.print(" Voltage=");
         Serial.print(voltage.getVoltage());
+        Serial.print(" Sensor=");
+        Serial.print(voltage.getSensorValue());
     }
     Serial.println();
     Serial.flush();

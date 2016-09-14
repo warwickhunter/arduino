@@ -1,45 +1,54 @@
 /**
- * An electronic name tag for use at super geeky meetings.
+ * A small weather station that uses the display of the Microview and the DHT11 temperature/humidity sensor.
  * 
- * Warwick Hunter 2016-04-16
+ * Warwick Hunter 2016-09-14
  */
 #include <MicroView.h>
+#include <DHT_U.h>
 
+const int DHT11_PIN = 0; // Digital PIN 0
 
-const int LAST_PAGE = 3;
+DHT dht(DHT11_PIN, DHT11);
 
-static int page = 0;
+void printHeader()
+{
+    Serial.println();
+    Serial.println("Humidity (%)\tTemperature (C)");
+}
 
 void setup() {
     uView.begin();
+    dht.begin();
+    Serial.begin(9600);
+    Serial.println("DHT TEST PROGRAM ");
+    Serial.println(__DATE__ " " __TIME__);
+    printHeader();
 }
 
-void display(const char* message) {
-    uView.clear(PAGE);
-    uView.setCursor(0, 0);
-    uView.print(message);
-    uView.display();
-}
+int sampleCount = 0;
 
 void loop() {
-  switch (page) {
-      case 0: // Name & occupation
-          display("Warwick\nHunter\n\nSoftware\nEngineer");
-          break;
-      case 1: // Skills
-          display("Warwick\nHunter\n\nAndroid\nJava C++\nLinux");
-          break;
-      case 2: // Contact
-          display("Warwick\nHunter\n\nw.hunter\n@computer\n.org");
-          break;
-      case 3: // Hobbies
-          display("Warwick\nHunter\n\nBMW Rider\nK1300S\nR1200GSA");
-          break;
-  }
-  uView.display();
-  ++page;
-  delay(2000);
-  if (page > LAST_PAGE) {
-    page = 0;
-  }
+
+    float humidity = dht.readHumidity();
+    float temperature = dht.readTemperature();
+
+    Serial.print(humidity, 1);
+    Serial.print("\t\t");
+    Serial.println(temperature, 1);
+
+    ++sampleCount;
+    if (sampleCount > 20) {
+        printHeader();
+        sampleCount = 0;
+    }
+
+    uView.clear(PAGE);
+    uView.setCursor(0, 0);
+    uView.print(temperature, 1);
+    uView.println(" C");
+    uView.print(humidity, 1);
+    uView.println(" %");
+  
+    uView.display();
+    delay(2000);
 }

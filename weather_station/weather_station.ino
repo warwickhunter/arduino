@@ -17,19 +17,21 @@ const int SPLASH    = 4000; // Display splash screen for 4 seconds
 
 DHT dht(DHT11_PIN, DHT11);
 
+/** Arduino setup, called once only */
+void setup() {
+    uView.begin();
+    dht.begin();
+}
+
 /** Show the date and time of this build */
 void splashScreen() {
+    uView.setFontType(0); // Use the default 5x7 pixel font
     uView.clear(PAGE);
     uView.setCursor(0, 0);
     uView.println("Wasa's\nWeather\n");
     uView.println("2016-09-18");
     uView.println(__TIME__);
     uView.display();
-}
-
-void setup() {
-    uView.begin();
-    dht.begin();
 }
 
 /** 
@@ -50,7 +52,10 @@ void drawUpdateIndicator(int sampleCount) {
     uView.pixel(x + 2, y - 2);
 }
 
+/** Show the temperature and humidity on two lines in the large font */
 void drawValues(float temperature, float humidity) {
+    uView.setFontType(1); // Use the large 8x16 pixel font
+
     uView.setCursor(X, Y1);
     uView.print(temperature, 1);
     uView.println(" C");
@@ -63,6 +68,7 @@ void drawValues(float temperature, float humidity) {
 int sampleCount = 0;
 bool isFirstTime = true;
 
+/** Arduino loop method, called continually forever */
 void loop() {
 
     if (isFirstTime) {
@@ -70,15 +76,9 @@ void loop() {
         delay(SPLASH);
         isFirstTime = false;
     }
-    uView.setFontType(1);
 
     float humidity = dht.readHumidity();
     float temperature = dht.readTemperature();
-
-    ++sampleCount;
-    if (sampleCount > 30) {
-        sampleCount = 0;
-    }
 
     uView.clear(PAGE);
     drawValues(temperature, humidity);
@@ -86,4 +86,9 @@ void loop() {
     uView.display();
 
     delay(DELAY);
+
+    ++sampleCount;
+    if (sampleCount > 30) {
+        sampleCount = 0;
+    }
 }

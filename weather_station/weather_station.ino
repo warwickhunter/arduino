@@ -9,7 +9,7 @@
 #include <DHT_U.h>
 
 const int DHT11_PIN = 6;    // Digital PIN 6 is comms to the DHT11
-const int X         = 4;    // X of all lines of text
+const int X         = 16;   // X of all lines of text
 const int Y1        = 8;    // Y of first line of text
 const int Y2        = 24;   // Y of second line of text
 const int DELAY     = 2000; // 2 seconds in between each screen update
@@ -29,7 +29,7 @@ void splashScreen() {
     uView.clear(PAGE);
     uView.setCursor(0, 0);
     uView.println("Wasa's\nWeather\n");
-    uView.println("2016-09-18");
+    uView.println("2016-09-19");
     uView.println(__TIME__);
     uView.display();
 }
@@ -57,12 +57,12 @@ void drawValues(float temperature, float humidity) {
     uView.setFontType(1); // Use the large 8x16 pixel font
 
     uView.setCursor(X, Y1);
-    uView.print(temperature, 1);
-    uView.println(" C");
+    uView.print(temperature, 0);
+    uView.print(" C");
 
     uView.setCursor(X, Y2);
-    uView.print(humidity, 1);
-    uView.println(" %");
+    uView.print(humidity, 0);
+    uView.print(" %");
 }
 
 int sampleCount = 0;

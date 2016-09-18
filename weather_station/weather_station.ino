@@ -15,34 +15,7 @@ const int Y2        = 24;   // Y of second line of text
 const int DELAY     = 2000; // 2 seconds in between each screen update
 const int SPLASH    = 4000; // Display splash screen for 4 seconds
 
-#define USE_SERIAL 0 // Output to serial as well
-
 DHT dht(DHT11_PIN, DHT11);
-
-void printHeader() {
-#if USE_SERIAL    
-    Serial.println();
-    Serial.println("Humidity (%)\tTemperature (C)");
-#endif // USE_SERIAL
-}
-
-void printValues(float humidity, float temperature) {
-#if USE_SERIAL    
-    Serial.print(humidity, 1);
-    Serial.print("\t\t");
-    Serial.println(temperature, 1);
-#endif // USE_SERIAL
-}
-
-void setupSerial() {
-#if USE_SERIAL    
-    Serial.begin(9600);
-    Serial.println("Wasa's Weather");
-    Serial.println("2016-09-18");
-    Serial.println(__TIME__);
-    printHeader();
-#endif // USE_SERIAL
-}
 
 /** Show the date and time of this build */
 void splashScreen() {
@@ -57,7 +30,6 @@ void splashScreen() {
 void setup() {
     uView.begin();
     dht.begin();
-    setupSerial();
 }
 
 /** 
@@ -78,6 +50,16 @@ void drawUpdateIndicator(int sampleCount) {
     uView.pixel(x + 2, y - 2);
 }
 
+void drawValues(float temperature, float humidity) {
+    uView.setCursor(X, Y1);
+    uView.print(temperature, 1);
+    uView.println(" C");
+
+    uView.setCursor(X, Y2);
+    uView.print(humidity, 1);
+    uView.println(" %");
+}
+
 int sampleCount = 0;
 bool isFirstTime = true;
 
@@ -93,25 +75,15 @@ void loop() {
     float humidity = dht.readHumidity();
     float temperature = dht.readTemperature();
 
-    printValues(humidity, temperature);
-
     ++sampleCount;
     if (sampleCount > 30) {
-        printHeader();
         sampleCount = 0;
     }
 
     uView.clear(PAGE);
-    uView.setCursor(X, Y1);
-    uView.print(temperature, 1);
-    uView.println(" C");
-
-    uView.setCursor(X, Y2);
-    uView.print(humidity, 1);
-    uView.println(" %");
-
+    drawValues(temperature, humidity);
     drawUpdateIndicator(sampleCount);
-  
     uView.display();
+
     delay(DELAY);
 }

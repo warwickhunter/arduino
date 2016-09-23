@@ -29,7 +29,7 @@ void splashScreen() {
     uView.clear(PAGE);
     uView.setCursor(0, 0);
     uView.println("Wasa's\nWeather\n");
-    uView.println("2016-09-19");
+    uView.println("2016-09-24");
     uView.println(__TIME__);
     uView.display();
 }
